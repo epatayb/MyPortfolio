@@ -1,4 +1,8 @@
+using MyPortfolio.DAL.Context;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
