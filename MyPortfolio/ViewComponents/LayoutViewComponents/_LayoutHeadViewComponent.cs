@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MyPortolioUdemy.ViewComponents.LayoutViewComponents
+namespace MyPortfolio.ViewComponents.LayoutViewComponents
 {
 	public class _LayoutHeadViewComponent : ViewComponent
 	{
