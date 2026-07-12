@@ -28,6 +28,18 @@ namespace MyPortfolio.Controllers
         [HttpPost]
         public IActionResult CreateExperience(Experience experience)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(experience);
+            }            
+            if(experience.EndDate == null && !experience.IsActive) {
+                ModelState.AddModelError("EndDate", "Lütfen bitiş tarihini giriniz veya 'Hala çalışıyorum' kutucuğunu işaretleyiniz.");
+                return View(experience);
+            }
+            if (experience.IsActive)
+            {
+                experience.EndDate = "Halen Devam Ediyor";
+            }
             _context.Experiences.Add(experience);
             _context.SaveChanges();
             return RedirectToAction("ExperienceList");

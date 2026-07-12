@@ -15,6 +15,7 @@
 			@RenderBody()
 		</div>
 	</div>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 @await Component.InvokeAsync("_LayoutScript")
 </html>

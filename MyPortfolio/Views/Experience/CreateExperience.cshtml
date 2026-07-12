@@ -1,44 +1,125 @@
 ﻿@model Experience
 
 @{
-	ViewData["Title"] = "CreateExperience";
-	Layout = "~/Views/Layout/Index.cshtml";
+    ViewData["Title"] = "CreateExperience";
+    Layout = "~/Views/Layout/Index.cshtml";
 }
 
 
 <div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Deneyimler</h4>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">Deneyim Ekleme Sayfası</div>
-					</div>
-					<div class="card-body">
+    <div class="container-fluid">
+        <h4 class="page-title">Deneyimler</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Deneyim Ekleme Sayfası</div>
+                    </div>
+                    <div class="card-body">
 
-						<form method="post">
-							<label>Firma Bilgisi</label>
-							<input type="text" asp-for="Head" class="form-control" />
-							<br />
-							<label>Çalışılan Pozisyon</label>
-							<input type="text" asp-for="Title" class="form-control" />
-							<br />
-							<label>Başlama Tarihi</label>
-							<input type="text" asp-for="StartDate" class="form-control" />
-							<br />
-							<label>Bitiş Tarihi</label>
-							<input type="text" asp-for="EndDate" class="form-control" />
-							<br />
-							<label>Açıklama</label>
-							<textarea rows="4" class="form-control" asp-for="Description"></textarea>
-							<br />
-							<button class="btn btn-primary">Deneyimi Ekle</button>
-						</form>
+                        <form method="post">
+                            <label>Firma Bilgisi</label>
+                            <input type="text" asp-for="Head" class="form-control" required />
+                            <span asp-validation-for="Head" class="text-danger"></span>
+                            <br />
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <label>Çalışılan Pozisyon</label>
+                            <input type="text" asp-for="Title" class="form-control" required />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                            <br />
+
+                            <label>Başlama Tarihi</label>
+                            <input type="date" asp-for="StartDate" class="form-control" required />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                            <br />
+
+                            <div style="margin-top: 20px; margin-bottom: 20px;">
+                                <label for="IsActiveCheck"
+                                       style=" display: inline-flex !important;
+                                                align-items: center !important;
+                                                gap: 8px !important;
+                                                cursor: pointer !important;
+                                                margin: 0 !important;">
+
+                                    <input asp-for="IsActive"
+                                           id="IsActiveCheck"
+                                           type="checkbox"
+                                           style=" all: revert !important;
+                                                display: inline-block !important;
+                                                appearance: auto !important;
+                                                -webkit-appearance: checkbox !important;
+                                                width: 18px !important;
+                                                height: 18px !important;
+                                                margin: 0 !important;
+                                                padding: 0 !important;
+                                                opacity: 1 !important;
+                                                visibility: visible !important;
+                                                position: static !important;
+                                                cursor: pointer !important; " />
+
+                                    <span style=" display: inline-block !important;
+                                                margin: 0 !important;
+                                                font-size: 14px !important;
+                                                color: #374151 !important; ">
+                                        Hâlâ bu pozisyonda çalışıyorum
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="EndDate" class="form-label">
+                                    Bitiş Tarihi
+                                </label>
+
+                                <input asp-for="EndDate"
+                                       type="date"
+                                       id="EndDateInput"
+                                       class="form-control" />
+                            </div>
+
+                            <label>Açıklama</label>
+                            <textarea rows="4" class="form-control" asp-for="Description"></textarea>
+                            <br />
+
+                            <button class="btn btn-primary">Deneyimi Ekle</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const isActiveCheckbox =
+                document.getElementById("IsActiveCheck");
+
+            const endDateInput =
+                document.getElementById("EndDateInput");
+
+            if (!isActiveCheckbox || !endDateInput) {
+                return;
+            }
+
+            function updateEndDateInput() {
+                const isCurrentPosition = isActiveCheckbox.checked;
+
+                endDateInput.disabled = isCurrentPosition;
+
+                if (isCurrentPosition) {
+                    endDateInput.value = "";
+                }
+            }
+
+            isActiveCheckbox.addEventListener(
+                "change",
+                updateEndDateInput
+            );
+
+            updateEndDateInput();
+        });
+    </script>
+}
