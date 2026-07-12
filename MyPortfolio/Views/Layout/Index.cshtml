@@ -10,8 +10,10 @@
 	<div class="wrapper">
 		@await Component.InvokeAsync("_LayoutNavbar")
 		@await Component.InvokeAsync("_LayoutSidebar")
-				
-		@RenderBody()
+		
+		<div class="main-panel">
+			@RenderBody()
+		</div>
 	</div>
 </body>
 @await Component.InvokeAsync("_LayoutScript")
