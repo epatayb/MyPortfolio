@@ -1,7 +1,7 @@
 ﻿@model Experience
 
 @{
-    ViewData["Title"] = "CreateExperience";
+    ViewData["Title"] = "UpdateExperience";
     Layout = "~/Views/Layout/Index.cshtml";
 }
 
@@ -12,12 +12,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Deneyim Ekleme Sayfası</div>
-                    </div>
                     <div class="card-body">
 
                         <form method="post">
+                            <input type="hidden" asp-for="Id" />
+
                             <label>Firma Bilgisi</label>
                             <input type="text" asp-for="Head" class="form-control" required />
                             <span asp-validation-for="Head" class="text-danger"></span>
@@ -81,7 +80,7 @@
                             <textarea rows="4" class="form-control" asp-for="Description"></textarea>
                             <br />
 
-                            <button type="submit" class="btn btn-primary">Deneyimi Ekle</button>
+                            <button class="btn btn-primary">Güncelle</button>
                         </form>
 
                     </div>
