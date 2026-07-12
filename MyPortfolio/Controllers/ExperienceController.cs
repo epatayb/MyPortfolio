@@ -31,8 +31,9 @@ namespace MyPortfolio.Controllers
             if (!ModelState.IsValid)
             {
                 return View(experience);
-            }            
-            if(experience.EndDate == null && !experience.IsActive) {
+            }
+            if (experience.EndDate == null && !experience.IsActive)
+            {
                 ModelState.AddModelError("EndDate", "Lütfen bitiş tarihini giriniz veya 'Hala çalışıyorum' kutucuğunu işaretleyiniz.");
                 return View(experience);
             }
@@ -44,5 +45,19 @@ namespace MyPortfolio.Controllers
             _context.SaveChanges();
             return RedirectToAction("ExperienceList");
         }
+
+        public IActionResult DeleteExperience(int id)
+        {
+            var experience = _context.Experiences.Find(id);
+            if (experience == null)
+            {
+                return NotFound();
+            }
+            _context.Experiences.Remove(experience);
+            _context.SaveChanges();
+            return RedirectToAction("ExperienceList");
+        }
+
+
     }
 }
