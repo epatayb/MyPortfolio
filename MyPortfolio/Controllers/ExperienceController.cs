@@ -5,7 +5,7 @@ namespace MyPortfolio.Controllers
 {
     public class ExperienceController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ExperienceList()
         {
             return View();
         }
